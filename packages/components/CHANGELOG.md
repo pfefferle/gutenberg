@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Enhancements
+
+-   `MenuItemsChoice`, `ToolsPanel`: Align selection marks before menu labels, with space reserved for unchecked items.
+
 ### Bug Fixes
 
 -   `CircularOptionPicker`: Keep the selected check mark visible on every swatch in forced colors mode ([#86393](https://github.com/WordPress/gutenberg/pull/86393)).
