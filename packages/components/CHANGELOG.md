@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   `MenuItemsChoice`, `ToolsPanel`: Align selection marks before menu labels, with space reserved for unchecked items ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
+-   `DropdownMenu`, `MenuItemsChoice`, `ToolsPanel`: Align mixed menu rows, leading selection marks, descriptions, and controls ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
 
 ### Bug Fixes
 
