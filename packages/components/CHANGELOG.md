@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   `DropdownMenu`, `MenuItemsChoice`, `ToolsPanel`: Align mixed menu rows, leading selection marks, descriptions, and controls ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
+-   `DropdownMenu`, `MenuItemsChoice`, `ToolsPanel`: Align leading selection marks, mixed menu rows, and description titles ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
 
 ### Bug Fixes
 
