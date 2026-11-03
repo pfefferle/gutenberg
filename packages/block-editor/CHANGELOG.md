@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New Features
+
+-   Add the Transform panel and its `transform` inspector controls group, for the new transform block support. Rotation is its first control ([#PRNUM](https://github.com/WordPress/gutenberg/pull/PRNUM)).
+
 ### Enhancements
 
 -   Block crash warning: Add a "Copy error" button that copies the error's stack trace to the clipboard ([#85575](https://github.com/WordPress/gutenberg/pull/85575)).
