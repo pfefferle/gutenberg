@@ -4,6 +4,7 @@
 
 ### Enhancements
 
+-   `MenuItem`: Add the opt-in `showSelectionIndicator` prop for leading selection marks. Existing caller-supplied selection icons remain supported; remove the supplied check and set the prop to adopt the built-in indicator ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
 -   `DropdownMenu`, `MenuItemsChoice`, `ToolsPanel`: Align leading selection marks, mixed menu rows, and description titles ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
 
 ### Bug Fixes
