@@ -54,11 +54,23 @@ const attributeAreaClosingPattern = /}[ \t\f\r\n]+$/g;
 const commentStartPattern = /<!--/g;
 
 /**
+ * Matches abrupt closings of empty comments.
+ *
+ * Example:
+ *     `<!-->`, `<!------>`
+ *
+ * @see https://html.spec.whatwg.org/#parse-error-abrupt-closing-of-empty-comment
+ *
+ * @since 24.4.0
+ */
+const abruptlyClosedCommentPattern = /^-*>/y;
+
+/**
  * Matches the end of an open HTML comment.
  *
  * @since 24.4.0
  */
-const commentEndPattern = /^-*>|--!?>/y;
+const commentEndPattern = /--!?>/g;
 
 /**
  * Constructs a block object.
@@ -382,6 +394,13 @@ function nextToken(): Token {
 			break;
 		}
 
+		abruptlyClosedCommentPattern.lastIndex = commentStartPattern.lastIndex;
+		const abruptlyClosedEnding = abruptlyClosedCommentPattern.exec( document );
+		if ( null !== abruptlyClosedEnding ) {
+			offset = document.length;
+			continue;
+		}
+
 		// Find the end of the potential delimiter. Start after the opening `<!--`.
 		commentEndPattern.lastIndex = commentStartPattern.lastIndex;
 		const commentEnd = commentEndPattern.exec( document );
@@ -393,7 +412,7 @@ function nextToken(): Token {
 		}
 
 		// Invalid comment closers are not blocks; e.g. "<!-- wp:block /--!>".
-		if ( '!' === document[ commentEnd.lastIndex - 2 ] ) {
+		if ( '!' === document[ commentEndPattern.lastIndex - 2 ] ) {
 			offset = commentEndPattern.lastIndex;
 			continue;
 		}
@@ -459,7 +478,7 @@ function nextToken(): Token {
 
 		const startedAt = nextComment.index;
 
-		const length = commentEndPattern.lastIndex - delimiterPrefix.index;
+		const length = commentEndPattern.lastIndex - nextComment.index;
 		const isCloser = '/' === delimiterPrefix[ 1 ];
 		const namespace = delimiterPrefix[ 2 ] || 'core/';
 		const name = namespace + delimiterPrefix[ 3 ];
