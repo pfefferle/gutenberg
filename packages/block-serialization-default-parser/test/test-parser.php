@@ -7,9 +7,7 @@
  * @package gutenberg
  */
 
-// Include the default parser.
-require_once __DIR__ . '/../parser.php';
-
+// This must run in an environment where the Core PHP parser is present.
 $parser = new WP_Block_Parser();
 
 echo json_encode( $parser->parse( file_get_contents( 'php://stdin' ) ) );

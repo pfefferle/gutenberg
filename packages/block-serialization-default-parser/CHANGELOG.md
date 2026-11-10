@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+-   The PHP parser has been removed, having moved into Core ([r61504](https://core.trac.wordpress.org/changeset/61504))
+
 ## 6.1.0 (2026-11-04)
 
 ### Bug Fixes
