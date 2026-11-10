@@ -63,7 +63,7 @@ const commentStartPattern = /<!--/g;
  *
  * @since 24.4.0
  */
-const abruptlyClosedCommentPattern = /^-*>/y;
+const abruptlyClosedCommentPattern = /-*>/y;
 
 /**
  * Matches the end of an open HTML comment.
@@ -384,20 +384,19 @@ function parseJSON( input: string ): Object | null {
  * @return The next matched token.
  */
 function nextToken(): Token {
-	while ( offset < document.length ) {
-		commentStartPattern.lastIndex = offset;
+	while ( commentStartPattern < document.length ) {
 		const nextComment = commentStartPattern.exec( document );
 
 		// If there are no more comment openers then there are no more blocks.
 		if ( null === nextComment ) {
-			offset = document.length;
+			commentStartPattern.lastIndex = document.length;
 			break;
 		}
 
 		abruptlyClosedCommentPattern.lastIndex = commentStartPattern.lastIndex;
 		const abruptlyClosedEnding = abruptlyClosedCommentPattern.exec( document );
 		if ( null !== abruptlyClosedEnding ) {
-			offset = document.length;
+			commentStartPattern.lastIndex = abruptlyClosedCommentPattern.lastIndex;
 			continue;
 		}
 
@@ -407,13 +406,13 @@ function nextToken(): Token {
 
 		// If the comment doesn’t close then there are no more blocks.
 		if ( null === commentEnd ) {
-			offset = document.length;
+			commentStartPattern.lastIndex = document.length;
 			break;
 		}
 
 		// Invalid comment closers are not blocks; e.g. "<!-- wp:block /--!>".
 		if ( '!' === document[ commentEndPattern.lastIndex - 2 ] ) {
-			offset = commentEndPattern.lastIndex;
+			commentStartPattern = commentEndPattern.lastIndex;
 			continue;
 		}
 
@@ -422,7 +421,7 @@ function nextToken(): Token {
 		//     <!-- ̲w̲p̲:̲a̲ -->                                      ␠   wp  :   a   ␠
 		//            ╰ the shortest possible inside contents are 1 + 2 + 1 + 1 + 1 = 6
 		if ( commentEnd.index < commentStartPattern.lastIndex + 6 ) {
-			offset = commentEndPattern.lastIndex;
+			commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 			continue;
 		}
 
@@ -432,7 +431,7 @@ function nextToken(): Token {
 
 		// Just another HTML comment.
 		if ( null === delimiterPrefix ) {
-			offset = commentEndPattern.lastIndex;
+			commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 			continue;
 		}
 
@@ -452,7 +451,7 @@ function nextToken(): Token {
 			hasAttrs &&
 			'{' !== document[ delimiterPrefixPattern.lastIndex ]
 		) {
-			offset = commentEndPattern.lastIndex;
+			commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 			continue;
 		}
 
@@ -468,7 +467,7 @@ function nextToken(): Token {
 			: null;
 
 		if ( hasAttrs && null === attributeClosing ) {
-			offset = commentEndPattern.lastIndex;
+			commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 			continue;
 		}
 
