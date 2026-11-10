@@ -6,6 +6,10 @@
 
 -   `PreferenceToggleMenuItem`: Use the built-in leading selection indicator ([#85861](https://github.com/WordPress/gutenberg/pull/85861)).
 
+### Bug Fixes
+
+-   Keep the scrollable Preferences area’s focus outline visible on narrow screens ([#86023](https://github.com/WordPress/gutenberg/pull/86023)).
+
 ## 5.1.0 (2026-11-04)
 
 ## 5.0.0 (2026-10-20)
