@@ -1033,6 +1033,22 @@
             - className
             - render
             - style
+- name: Page
+  props:
+      - actions
+      - ariaLabel
+      - badges
+      - breadcrumbs
+      - children
+      - className
+      - components
+      - hasPadding
+      - headingLevel
+      - navigation
+      - showSidebarToggle
+      - subTitle
+      - title
+      - visual
 - name: Popover
   props:
       - __unstableForcePosition

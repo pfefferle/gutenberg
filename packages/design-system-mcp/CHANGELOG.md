@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Enhancements
+
+-   The server instructions now name `@wordpress/admin-ui` as a source of components, along with `@wordpress/ui` and `@wordpress/components`. The catalog now includes `Page` from `@wordpress/admin-ui`.
+
 ## 0.16.0 (2026-11-04)
 
 ### New Features
