@@ -34,34 +34,31 @@ type Token = [ TokenType, string, Attributes, number, number ];
  *  2. Namespace
  *  3. Block name
  *
- * @since 24.3.0
+ * @since 24.4.0
  */
 const delimiterPrefixPattern =
-	/[ \t\f\r\n]+(\/)?wp:([a-z][a-z0-9_-]*\/)?([a-z][a-z0-9_-]*)[ \t\f\r\n]+/g;
+	/[ \t\f\r\n]+(\/)?wp:([a-z][a-z0-9_-]*\/)?([a-z][a-z0-9_-]*)[ \t\f\r\n]+/y;
 
 /**
  * Matches the end of a block delimiter’s JSON attribute area.
  *
- * Sub-matches:
- *  1. Void flag
- *
- * @since 24.3.0
+ * @since 24.4.0
  */
 const attributeAreaClosingPattern = /}[ \t\f\r\n]+$/g;
 
 /**
  * Matches the start of an HTML comment;
  *
- * @since 24.3.0
+ * @since 24.4.0
  */
 const commentStartPattern = /<!--/g;
 
 /**
  * Matches the end of an open HTML comment.
  *
- * @since 24.3.0
+ * @since 24.4.0
  */
-const commentEndPattern = /^-*>|--!?>/g;
+const commentEndPattern = /^-*>|--!?>/y;
 
 /**
  * Constructs a block object.
@@ -395,6 +392,12 @@ function nextToken(): Token {
 			break;
 		}
 
+		// Invalid comment closers are not blocks; e.g. "<!-- wp:block /--!>".
+		if ( '!' === document[ commentEnd.lastIndex - 2 ] ) {
+			offset = commentEndPattern.lastIndex;
+			continue;
+		}
+
 		// The comment closed before a block delimiter could possibly exist.
 		//
 		//     <!-- ̲w̲p̲:̲a̲ -->                                      ␠   wp  :   a   ␠
@@ -418,8 +421,13 @@ function nextToken(): Token {
 		// JSON attributes are a map. It need not be valid JSON, but it must be bounded by
 		// curly brackets.
 
+		// commentEnd always follows previous characters which cannot
+		// be a `/` unless it is a void block delimiter.
+		const isVoid = '/' === document[ commentEnd.index - 1 ];
+		const voidBackup = isVoid ? 1 : 0;
+
 		const attributeAreaLength =
-			commentEnd.index - delimiterPrefixPattern.lastIndex;
+			commentEnd.index - voidBackup - delimiterPrefixPattern.lastIndex;
 		const hasAttrs = attributeAreaLength > 0;
 		if (
 			hasAttrs &&
@@ -429,13 +437,9 @@ function nextToken(): Token {
 			continue;
 		}
 
-		// commentEnd always follows previous characters which cannot
-		// be a `/` unless it is a void block delimiter.
-		const isVoid = '/' === document[ commentEnd.index - 1 ];
-
 		const attributeArea = document.slice(
-			delimiterPrefixPattern.lastIndex + 1,
-			commentEnd.index - ( isVoid ? 1 : 0 )
+			delimiterPrefixPattern.lastIndex,
+			commentEnd.index - voidBackup
 		);
 
 		// Skip the opening `{` to find the end of the JSON area.
@@ -455,8 +459,8 @@ function nextToken(): Token {
 
 		const startedAt = nextComment.index;
 
-		const length = commentEndPattern.lastIndex;
-		const isCloser = delimiterPrefix[ 1 ];
+		const length = commentEndPattern.lastIndex - delimiterPrefix.index;
+		const isCloser = '/' === delimiterPrefix[ 1 ];
 		const namespace = delimiterPrefix[ 2 ] || 'core/';
 		const name = namespace + delimiterPrefix[ 3 ];
 		const attrs = jsonAttributes ? parseJSON( jsonAttributes ) : {};
