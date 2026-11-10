@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   The server instructions now name `@wordpress/admin-ui` as a source of components, along with `@wordpress/ui` and `@wordpress/components`. The catalog now includes `Page` from `@wordpress/admin-ui`.
+-   Add `Page` from `@wordpress/admin-ui` to the component catalog, and name `@wordpress/admin-ui` as a component source in the server instructions ([#86615](https://github.com/WordPress/gutenberg/pull/86615)).
 
 ## 0.16.0 (2026-11-04)
 
