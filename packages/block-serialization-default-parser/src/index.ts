@@ -217,7 +217,7 @@ export const parse = ( doc: string ): ParsedBlock[] => {
 	offset = 0;
 	output = [];
 	stack = [];
-	delimiterPrefixPattern.lastIndex = 0;
+	commentStartPattern.lastIndex = 0;
 
 	do {
 		// twiddle our thumbs
@@ -384,7 +384,7 @@ function parseJSON( input: string ): Object | null {
  * @return The next matched token.
  */
 function nextToken(): Token {
-	while ( commentStartPattern < document.length ) {
+	while ( commentStartPattern.lastIndex < document.length ) {
 		const nextComment = commentStartPattern.exec( document );
 
 		// If there are no more comment openers then there are no more blocks.
@@ -412,7 +412,7 @@ function nextToken(): Token {
 
 		// Invalid comment closers are not blocks; e.g. "<!-- wp:block /--!>".
 		if ( '!' === document[ commentEndPattern.lastIndex - 2 ] ) {
-			commentStartPattern = commentEndPattern.lastIndex;
+			commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 			continue;
 		}
 
@@ -476,6 +476,7 @@ function nextToken(): Token {
 			: null;
 
 		const startedAt = nextComment.index;
+		commentStartPattern.lastIndex = commentEndPattern.lastIndex;
 
 		const length = commentEndPattern.lastIndex - nextComment.index;
 		const isCloser = '/' === delimiterPrefix[ 1 ];
