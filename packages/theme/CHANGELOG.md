@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   `ThemeProvider`: Retain saturated background colors in neighboring surfaces and adjust the primary ramp to meet focus and strong-fill contrast against neutral and brand surfaces.
+-   `ThemeProvider`: Retain saturated background colors in neighboring surfaces and adjust the primary ramp to meet focus and strong-fill contrast against neutral and brand surfaces ([#86614](https://github.com/WordPress/gutenberg/pull/86614)).
 -   Generate Figma-compatible typography exports with single font families, numeric font weights, and typography scopes ([#86211](https://github.com/WordPress/gutenberg/pull/86211)).
 
 ### Bug Fixes
