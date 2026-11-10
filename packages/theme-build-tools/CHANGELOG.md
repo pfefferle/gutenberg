@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Bug Fixes
+
+-   Parse CSS `var()` references for PostCSS fallback injection and Stylelint validation, avoiding false positives in strings and URLs ([#83766](https://github.com/WordPress/gutenberg/pull/83766)).
+
 ### Internal
 
 -   Update the Vite development dependency to 8.3.6 ([#86500](https://github.com/WordPress/gutenberg/pull/86500)).
