@@ -47,7 +47,7 @@ const delimiterPrefixPattern =
  *
  * @since 24.3.0
  */
-const attributeAreaClosingPattern = /}[ \t\f\r\n]+(\/)?$/g;
+const attributeAreaClosingPattern = /}[ \t\f\r\n]+$/g;
 
 /**
  * Matches the start of an HTML comment;
@@ -429,10 +429,15 @@ function nextToken(): Token {
 			continue;
 		}
 
+		// commentEnd always follows previous characters which cannot
+		// be a `/` unless it is a void block delimiter.
+		const isVoid = '/' === document[ commentEnd.index - 1 ];
+
 		const attributeArea = document.slice(
 			delimiterPrefixPattern.lastIndex + 1,
-			commentEnd.index
+			commentEnd.index - ( isVoid ? 1 : 0 )
 		);
+
 		// Skip the opening `{` to find the end of the JSON area.
 		attributeAreaClosingPattern.lastIndex = 1;
 		const attributeClosing = hasAttrs
@@ -444,7 +449,6 @@ function nextToken(): Token {
 			continue;
 		}
 
-		const isVoid = '/' === attributeClosing[ 1 ];
 		const jsonAttributes = attributeClosing
 			? attributeArea.slice( 0, attributeClosing.index + 1 )
 			: null;
