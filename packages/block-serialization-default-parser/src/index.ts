@@ -394,9 +394,11 @@ function nextToken(): Token {
 		}
 
 		abruptlyClosedCommentPattern.lastIndex = commentStartPattern.lastIndex;
-		const abruptlyClosedEnding = abruptlyClosedCommentPattern.exec( document );
+		const abruptlyClosedEnding =
+			abruptlyClosedCommentPattern.exec( document );
 		if ( null !== abruptlyClosedEnding ) {
-			commentStartPattern.lastIndex = abruptlyClosedCommentPattern.lastIndex;
+			commentStartPattern.lastIndex =
+				abruptlyClosedCommentPattern.lastIndex;
 			continue;
 		}
 
