@@ -17,6 +17,7 @@
 
 ### Bug Fixes
 
+-   `Button`, `Toolbar`: Keep pressed foreground and fill colors paired across themes and interaction states, including numbered toolbar buttons ([#85073](https://github.com/WordPress/gutenberg/pull/85073)).
 -   `Snackbar`: Run the action when its button is activated with Enter or Space, instead of dismissing the snackbar without running it ([#86670](https://github.com/WordPress/gutenberg/pull/86670)).
 -   `Shortcut`: Show keyboard shortcuts left to right on right-to-left pages, so `⌘K` no longer appears as `K⌘` in tooltips and menu items ([#86606](https://github.com/WordPress/gutenberg/pull/86606)).
 -   `Modal`: Match scroll-area focus outline corners to the modal frame where they meet ([#86023](https://github.com/WordPress/gutenberg/pull/86023)).

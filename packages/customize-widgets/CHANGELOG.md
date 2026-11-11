@@ -4,6 +4,7 @@
 
 ### Bug Fixes
 
+-   Use matching theme-aware colors for header buttons, including the inserter and disabled pressed controls ([#85073](https://github.com/WordPress/gutenberg/pull/85073)).
 -   Keyboard shortcuts help modal: Show key combinations left to right on right-to-left pages ([#86606](https://github.com/WordPress/gutenberg/pull/86606)).
 
 ## 6.1.0 (2026-11-04)
