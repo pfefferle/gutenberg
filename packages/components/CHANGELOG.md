@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   `AnglePickerControl`: Add `min` and `max` props to set the range of angles that can be entered. The defaults stay `0` and `360` ([#00000](https://github.com/WordPress/gutenberg/pull/00000)).
+-   `AnglePickerControl`: Add `min` and `max` props to set the range of angles that can be entered. The defaults stay `0` and `360` ([#86631](https://github.com/WordPress/gutenberg/pull/86631)).
 
 ### Bug Fixes
 
@@ -23,7 +23,7 @@
 
 ### Internal
 
--   Add a private `PrivateAnglePickerControl` whose `allowEmpty` option reports a cleared input as `undefined` instead of `0` ([#00000](https://github.com/WordPress/gutenberg/pull/00000)).
+-   Add a private `PrivateAnglePickerControl` whose `allowEmpty` option reports a cleared input as `undefined` instead of `0` ([#86631](https://github.com/WordPress/gutenberg/pull/86631)).
 -   Update the Storybook development dependencies to 10.6.6 ([#86507](https://github.com/WordPress/gutenberg/pull/86507)).
 -   Update the Vitest development dependency to 5.1.0 ([#86509](https://github.com/WordPress/gutenberg/pull/86509)).
 
