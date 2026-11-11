@@ -4,11 +4,11 @@
 
 ### Breaking Changes
 
--   `Button`: Use WPDS tokens for ordinary and destructive colors. Customize these colors with `ThemeProvider` instead of legacy color overrides ([#85073](https://github.com/WordPress/gutenberg/pull/85073)).
+-   `Button`: Use WPDS tokens for ordinary and destructive colors. Customize these colors with `ThemeProvider` instead of legacy color overrides ([#86683](https://github.com/WordPress/gutenberg/pull/86683)).
 
 ### Enhancements
 
--   `ButtonGroup`: Inherit Button foreground colors and use a theme-aware outline ([#85073](https://github.com/WordPress/gutenberg/pull/85073)).
+-   `ButtonGroup`: Inherit Button foreground colors and use a theme-aware outline ([#86683](https://github.com/WordPress/gutenberg/pull/86683)).
 -   `Button`: Use theme-aware WPDS colors for disabled states ([#86681](https://github.com/WordPress/gutenberg/pull/86681)).
 -   `AnglePickerControl`: Increase dial border contrast on hover and while pressed ([#86577](https://github.com/WordPress/gutenberg/pull/86577)).
 -   `AnglePickerControl`, `BorderControl`: Use the design system border color. Legacy `--wp-components-color-gray-600` overrides no longer affect these borders ([#86577](https://github.com/WordPress/gutenberg/pull/86577)).
