@@ -4,7 +4,7 @@
 
 ### Enhancements
 
--   `AnglePickerControl`: Add `min` and `max` props to set the range of angles that can be entered. The defaults stay `0` and `360` ([#86631](https://github.com/WordPress/gutenberg/pull/86631)).
+-   `AnglePickerControl`: Add `min` and `max` props to set the range of angles that can be entered. With a custom range, the dial turns like a knob and stops at `min` and `max`. The defaults stay `0` and `360` ([#86631](https://github.com/WordPress/gutenberg/pull/86631)).
 
 ### Bug Fixes
 
