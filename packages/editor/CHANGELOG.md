@@ -11,6 +11,7 @@
 
 ### Bug Fixes
 
+-   Notes: Include an Embed block in a note that spans text on both sides of it ([#86669](https://github.com/WordPress/gutenberg/pull/86669)).
 -   Keyboard shortcuts help modal: Show key combinations left to right on right-to-left pages ([#86606](https://github.com/WordPress/gutenberg/pull/86606)).
 -   Post Author: Show the search loading message in the same layout as the suggestions, with a smaller spinner ([#86501](https://github.com/WordPress/gutenberg/pull/86501)).
 -   Editor canvas: Remove the padding around the canvas when editing a template from the post editor, since the canvas can't be resized ([#86436](https://github.com/WordPress/gutenberg/pull/86436)).
