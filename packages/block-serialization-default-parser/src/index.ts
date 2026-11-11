@@ -47,7 +47,7 @@ const delimiterPrefixPattern =
 const attributeAreaClosingPattern = /}[ \t\f\r\n]+$/g;
 
 /**
- * Matches the start of an HTML comment;
+ * Matches the start of an HTML comment.
  *
  * @since 24.4.0
  */
